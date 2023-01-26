@@ -30,7 +30,7 @@ jobs:
       postgres_main:
         image: postgres:12
         env:
-          POSTGRES_USER: ${{ env.POSGRES_USER }}
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
         ports:
@@ -67,5 +67,4 @@ jobs:
           POSTGRES_USER: ${{ secrets.DATABASE_USER }}
           POSTGRES_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-         source env/bin/activate
-         pytest --host=$POSTGRES_HOST --port=$POSTGRES_PORT --db=$POSTGRES_DB --user=$POSTGRES_USER --password=$POSTGRES_PASSWORD --cov=blog tests/
+          python myproject/manage.py test blog
