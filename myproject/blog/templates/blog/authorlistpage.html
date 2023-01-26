@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} Author List Page {% endblock %}
+{% block extra_css %}
+<style>
+    h1{
+        color: white;
+    }
+    a.author {
+        text-decoration: none;
+        font-size: large;
+        color: white;
+    }
+
+    a.author:hover {
+        color: rgb(157, 201, 157);
+        font-size: larger;
+    }
+
+    /* Author List Container */
+    .author-list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        background-color: #0b0b0b;
+        padding: 1rem;
+
+    }   
+</style>
+{% endblock %}
+{% block content %}
+<div class="author-list">
+    <h1>Authors:</h1>
+    {% for author in object_list %}
+    <ul>
+        <li>
+            <a class="author" href="{% url 'blog:authordetailview' author.id %}">{{author.name}}</a>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
+
+{% endblock %}

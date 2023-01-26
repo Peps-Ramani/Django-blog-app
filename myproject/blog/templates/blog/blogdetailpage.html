@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %} Blog Detail Page {% endblock %}
+{% block extra_css %}
+<style>
+    p {
+        font-size: large;
+    }
+
+    a.comment {
+        text-decoration: none;
+        font-size: larger;
+    }
+
+    a.comment:hover {
+        color: green;
+        font-size: 30px;
+    }
+
+    .header {
+        padding: 10px;
+        font-size: 25px;
+        text-align: center;
+    }
+    .date-writer {
+        text-align: right;
+        font-size: large;
+        font-style: italic;
+    }
+    #comments{
+        border: 1px solid black;
+        border-radius: 5px;
+        
+    }
+    #comments > p{
+        font-size: 30px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+    #comments li p{
+        font-size: 20px;
+        border: 1px solid grey;
+        padding: 3px;
+        border-radius: 5px;
+        color: white;
+        background-color: rgb(37, 35, 35);
+    }
+    #comments li{
+        list-style-type: square;
+    }
+    .below-content{
+        margin: 10px;
+    }
+    
+</style>
+{% endblock %}
+{% block content %}
+<div class="header">
+    <h1>{{ context.title }}</h1>
+</div>
+<div>
+    <p class="date-writer"><span>Posted on :</span>{{context.posted_date}}</p>
+    <p>{{ context.content }}</p>
+    <p class="date-writer" ><span>Written by :</span>{{context.author.name}}</p>
+</div>
+<div id="comments">
+    <p>Comments : </p>
+    {% for com in object_list %}
+    <ul>
+        <li>
+            <p>{{com.comment_content}}</p>
+            <span>{{com.commented_date}}</span>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
+<div class="below-content">
+    <a class="comment" href="{% url 'blog:commentpage' context.id %}">Click here to add Comments</a>
+</div>
+{% endblock %}
+

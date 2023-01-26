@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} Author Detail Page {% endblock %}
+{% block extra_css %}
+<style>
+    p{
+        font-size: large;
+    }
+    a.blog{
+        text-decoration: none;
+        font-size: large;
+    }
+    a.blog:hover{
+        color: green;
+        font-size: larger;
+    }
+    .header {
+        padding: 10px;
+        font-size: 25px;
+        text-align: center;
+    }
+    .author{
+        padding: 5px;
+    }
+    #aboutauthor{
+        font-size: 30px;
+        font-weight: bold;
+    }
+    
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="header">
+    <h1> {{context.name}} </h1>
+</div>
+<div class="author">
+    <p id="aboutauthor">About Author:</p>
+    <p>{{context.about_author}}</p>
+</div>
+
+<h3>Blogs by this author are given below: </h3>
+{% for blog in author_detail %}
+<ul>
+    <li>
+        <a class="blog" href="{% url 'blog:blogdetailview' blog.id %}">{{ blog.title }}</a>
+        <span>{{blog.posted_date}}</span>
+    </li>
+</ul>
+{% endfor %}
+{% endblock %}

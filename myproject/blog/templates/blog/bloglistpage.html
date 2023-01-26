@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %} Blog List Page {% endblock %}
+{% block content %}
+{% block extra_css %}
+<style>
+    .container li{
+        padding: 10px;
+        font-size: large;
+        list-style-type: decimal;
+
+    }
+    .container a:hover,.pagination a:hover {
+        color: green;
+        font-size: larger;
+    }
+    .link-update{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: large;
+    }
+    .container span{
+        padding: 5px;
+        margin: 10px;
+        border: 2px solid white;
+        border-radius: 5px;
+        color: white;
+        background-color: black ;
+    }
+    .pagination{
+        margin-left: 45%;
+        bottom: 70px ; 
+        position: absolute; 
+    }
+   
+    .step-links{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .container {
+        
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+.blog-list__item {
+    width: 32%;
+    margin-bottom: 2rem;
+    box-shadow: 0px 0px 10px #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+</style>
+{% endblock %}
+<div class="container">
+    <ul>
+        {% for blog in page_obj %}
+        <li>
+            <a class="link-update" href="{% url 'blog:blogdetailview' blog.id %}">{{blog.title}} </a>
+            <span> {{blog.posted_date}}  </span>
+            <a class="link-update" href="{% url 'blog:authordetailview' blog.author_id %}">{{blog.author}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="pagination">
+    <footer>
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a class="link-update" href="?page=1">&laquo; first</a>
+            <a class="link-update" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <a class="link-update" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="link-update" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </footer>
+
+</div>
+{% endblock %}
