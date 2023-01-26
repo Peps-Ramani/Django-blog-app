@@ -61,11 +61,11 @@ jobs:
         env:
           ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
           DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          POSTGRES_NAME: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
           POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           POSTGRES_HOST: ${{ secrets.DATABASE_HOST }}
           POSTGRES_USER: ${{ secrets.DATABASE_USER }}
           POSTGRES_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-          python myproject/manage.py createdb
-          python myproject/manage.py test blog
+         source env/bin/activate
+         pytest --host=$POSTGRES_HOST --port=$POSTGRES_PORT --db=$POSTGRES_DB --user=$POSTGRES_USER --password=$POSTGRES_PASSWORD --cov=blog tests/
