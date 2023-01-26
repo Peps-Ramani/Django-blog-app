@@ -67,4 +67,5 @@ jobs:
           POSTGRES_USER: ${{ secrets.DATABASE_USER }}
           POSTGRES_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
+          python myproject/manage.py createdb
           python myproject/manage.py test blog
