@@ -59,6 +59,7 @@ jobs:
       - name: Run Tests
         # Step specific environment variables
         env:
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
