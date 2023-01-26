@@ -19,15 +19,31 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Add in environment variables for the entire "build" job
-  
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: localhost # default host value for the database
+      POSTGRES_DB: djtesting
+      POSTGRES_PORT: 5432
+      DJANGO_SECRET_KEY: test-key-not-good
     services:
       postgres_main:
         image: postgres:12
-        
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
     # If you want to test multiple python version(s)
     strategy:
       matrix:
-        python-version: ["3.9"] # ["3.8", "3.9", "3.10"]
+        python-version: ["3.8"] # ["3.8", "3.9", "3.10"]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -39,16 +55,15 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install requirements
         run: |
-          pip install -r myproject/requirements.txt
+          pip install -r requirements.txt
       - name: Run Tests
         # Step specific environment variables
         env:
-          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-          python myproject/manage.py test blog
+          python manage.py test
