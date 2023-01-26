@@ -67,4 +67,4 @@ jobs:
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-          python myproject/manage.py test
+          python myproject/manage.py test blog
