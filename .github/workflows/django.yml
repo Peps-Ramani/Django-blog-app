@@ -55,7 +55,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install requirements
         run: |
-          pip install -r requirements.txt
+          pip install -r myproject/requirements.txt
       - name: Run Tests
         # Step specific environment variables
         env:
@@ -66,4 +66,4 @@ jobs:
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-          python manage.py test
+          python myproject/manage.py test
