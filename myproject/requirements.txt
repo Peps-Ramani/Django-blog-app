@@ -3,5 +3,6 @@ Django==4.1.5
 django-crispy-forms==1.14.0
 psycopg2-binary==2.9.5
 Pympler==1.0.1
+python-dotenv==0.21.1
 sqlparse==0.4.3
 tzdata==2022.7

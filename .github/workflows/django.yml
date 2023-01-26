@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
   # Triggered based on the git event type
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -20,12 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     # Add in environment variables for the entire "build" job
     env:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: payal@3421
-      POSTGRES_HOST: localhost # default host value for the database
-      POSTGRES_DB: postgres
-      POSTGRES_PORT: 5432
-      DJANGO_SECRET_KEY: django-insecure-bwd9d28t+(6ckyb4rula+-w@xl6o^o&=4$)36vcdgu-9%s*4yq
+      POSTGRES_USER: ${{ secrets.DATABASE_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      POSTGRES_HOST: ${{ secrets.DATABASE_HOST }} # default host value for the database
+      POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+      POSTGRES_PORT: ${{ secrets.DATABASE_PORT }}
+      DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
     services:
       postgres_main:
         image: postgres:12
