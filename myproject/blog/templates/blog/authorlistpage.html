@@ -25,10 +25,42 @@
         background-color: #0b0b0b;
         padding: 1rem;
 
-    }   
+    }  
+    .add-blog-button {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+    }
+
+    .add-blog-button .btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .add-blog-button .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .add-blog-button .btn:active {
+        background-color: #00438a;
+    }
+
+    .add-blog-button .btn:focus {
+        outline: none;
+    }
 </style>
 {% endblock %}
+
 {% block content %}
+<div class="add-blog-button">
+    <a href="{% url 'blog:author_create' %}" class="btn btn-primary">Add Author</a>
+</div> 
+
 <div class="author-list">
     <h1>Authors:</h1>
     {% for author in object_list %}

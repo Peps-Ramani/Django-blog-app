@@ -1,12 +1,31 @@
-from django.views.generic import TemplateView,ListView
+from typing import Any
+from django.db import models
+from django.views.generic import TemplateView,ListView,CreateView
 from .models import Blog,Author,Comment
 from django.shortcuts import render,redirect
 from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
+from .forms import BlogForm,AuthorForm
+from django.urls import reverse_lazy
 
+    
 class HomePage(TemplateView):
     template_name = 'blog/homepage.html'
 
+
+class BlogCreateView(CreateView):
+    model = Blog
+    form_class = BlogForm
+    template_name = 'blog/blog_create.html'
+    success_url = reverse_lazy('blog:bloglistview')  # Update the success_url
+
+class AuthorCreateView(CreateView):
+    model = Author
+    form_class = AuthorForm
+    template_name = 'blog/author_create.html'
+    success_url = reverse_lazy('blog:authorlistview')  # Update the success_url
+
+    
 class BlogListView(ListView):
     template_name = 'blog/bloglistpage.html'
     queryset = Blog.objects.order_by('-posted_date')
