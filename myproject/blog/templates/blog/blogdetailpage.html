@@ -1,80 +1,105 @@
 {% extends 'base.html' %}
-{% block title %} Blog Detail Page {% endblock %}
+{% block title %}Blog Detail Page{% endblock %}
 {% block extra_css %}
 <style>
-    p {
-        font-size: large;
-    }
-
-    a.comment {
-        text-decoration: none;
-        font-size: larger;
-    }
-
-    a.comment:hover {
-        color: green;
-        font-size: 30px;
-    }
-
     .header {
-        padding: 10px;
-        font-size: 25px;
+        padding: 0px;
+        font-size: 28px;
         text-align: center;
+        background-color: #333;
+        color: #fff;
+        margin-bottom: 10px;
+        border-radius: 5px;
     }
+
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #333;
+    }
+
     .date-writer {
         text-align: right;
-        font-size: large;
+        font-size: 16px;
         font-style: italic;
+        margin-top: 0px;
+        color: #888;
     }
-    #comments{
-        border: 1px solid black;
+
+    #comments {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
         border-radius: 5px;
-        
+        background-color: #f0f0f0;
     }
-    #comments > p{
-        font-size: 30px;
+
+    #comments > p {
+        font-size: 24px;
         font-weight: bold;
-        margin-left: 10px;
+        margin-bottom: 10px;
+        color: #333;
     }
-    #comments li p{
-        font-size: 20px;
-        border: 1px solid grey;
-        padding: 3px;
+
+    #comments li {
+        list-style-type: none;
+        margin-bottom: 10px;
+    }
+
+    #comments li p {
+        font-size: 16px;
+        border: 1px solid #ccc;
+        padding: 5px;
         border-radius: 5px;
-        color: white;
-        background-color: rgb(37, 35, 35);
+        color: #333;
+        background-color: #f9f9f9;
     }
-    #comments li{
-        list-style-type: square;
+
+    .below-content {
+        margin-top: 10px;
+        text-align: center;
     }
-    .below-content{
-        margin: 10px;
+
+    .comment-link {
+        text-decoration: none;
+        font-size: 20px;
+        color: #007bff;
+        transition: color 0.2s;
     }
-    
+
+    .comment-link:hover {
+        color: #0056b3;
+        font-weight: bold;
+    }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="header">
     <h1>{{ context.title }}</h1>
 </div>
+
 <div>
-    <p class="date-writer"><span>Posted on :</span>{{context.posted_date}}</p>
+    <p class="date-writer"><span>Posted on:</span> {{ context.posted_date }}</p>
     <p>{{ context.content }}</p>
-    <p class="date-writer" ><span>Written by :</span>{{context.author.name}}</p>
+    <p class="date-writer"><span>Written by:</span> {{ context.author.name }}</p>
 </div>
+
+{% if object_list %}
 <div id="comments">
-    <p>Comments : </p>
-    {% for com in object_list %}
+    <p>Comments:</p>
     <ul>
+        {% for com in object_list %}
         <li>
-            <p>{{com.comment_content}}</p>
-            <span>{{com.commented_date}}</span>
+            <p>{{ com.comment_content }}</p>
+            <span>{{ com.commented_date }}</span>
         </li>
+        {% endfor %}
     </ul>
-    {% endfor %}
 </div>
+{% endif %}
+
 <div class="below-content">
-    <a class="comment" href="{% url 'blog:commentpage' context.id %}">Click here to add Comments</a>
+    <a class="comment-link" href="{% url 'blog:commentpage' context.id %}">Click here to add comments</a>
 </div>
 {% endblock %}
-

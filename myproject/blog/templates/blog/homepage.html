@@ -1,30 +1,34 @@
 {% extends 'base.html' %}
-{% block title %} Home Page {% endblock %}
+{% block title %}Home Page{% endblock %}
 {% block extra_css %}
 <style>
-    h1{
-        text-align:center;
-        font-size: 50px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-    .homepage p{
-        font-size: large;
+    .homepage {
         text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .homepage h1 {
+        font-size: 50px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .homepage p {
+        font-size: 18px;
         font-family: 'Times New Roman', Times, serif;
+        margin-bottom: 10px;
     }
 </style>
 {% endblock %}
-{% block content %}
 
+{% block content %}
 <div class="homepage">
     <h1>Welcome {{ user.username }}!</h1>
     <p>Thank you for visiting our blog. We're glad you're here and excited to share our thoughts and experiences with you.
         Our blog is dedicated to providing valuable and informative content on a variety of topics including travel,
         personal development, and more.</p>
     <p>We believe that everyone has a unique perspective to share and we welcome you to share your own thoughts and
-        experiences in the comments section of our posts. We also encourage you to sign up for our newsletter to stay
-        updated on our latest posts and events.</p>
+        experiences in the comments section of our posts.</p>
     <p>Again, welcome to our blog. We hope you enjoy reading our posts and find them informative and inspiring.</p>
 </div>
-
 {% endblock %}

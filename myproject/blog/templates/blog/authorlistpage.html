@@ -1,75 +1,81 @@
 {% extends 'base.html' %}
-{% block title %} Author List Page {% endblock %}
+
+{% block title %}Author List Page{% endblock %}
+
 {% block extra_css %}
 <style>
-    h1{
-        color: white;
-    }
-    a.author {
-        text-decoration: none;
-        font-size: large;
-        color: white;
+    h1 {
+        color: #333;
+        font-size: 28px;
+        text-align: center;
+        margin: 20px 0;
     }
 
-    a.author:hover {
-        color: rgb(157, 201, 157);
-        font-size: larger;
-    }
-
-    /* Author List Container */
     .author-list {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        background-color: #0b0b0b;
-        padding: 1rem;
-
-    }  
-    .add-blog-button {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 20px;
+        justify-items: center;
     }
 
-    .add-blog-button .btn {
+    .author-card {
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .author-name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .author-link {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.2s;
+    }
+
+    .author-link:hover {
+        color: #0056b3;
+    }
+
+    .add-author-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .add-author-link {
         background-color: #007bff;
         color: white;
-        border: none;
+        text-decoration: none;
         padding: 8px 16px;
-        font-size: 14px;
         border-radius: 4px;
-        cursor: pointer;
+        transition: background-color 0.2s;
     }
 
-    .add-blog-button .btn:hover {
+    .add-author-link:hover {
         background-color: #0056b3;
-    }
-
-    .add-blog-button .btn:active {
-        background-color: #00438a;
-    }
-
-    .add-blog-button .btn:focus {
-        outline: none;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="add-blog-button">
-    <a href="{% url 'blog:author_create' %}" class="btn btn-primary">Add Author</a>
-</div> 
+<h1>Authors</h1>
 
 <div class="author-list">
-    <h1>Authors:</h1>
     {% for author in object_list %}
-    <ul>
-        <li>
-            <a class="author" href="{% url 'blog:authordetailview' author.id %}">{{author.name}}</a>
-        </li>
-    </ul>
+    <div class="author-card">
+        <h2 class="author-name">{{ author.name }}</h2>
+        <a class="author-link" href="{% url 'blog:authordetailview' author.id %}">View Author</a>
+    </div>
     {% endfor %}
 </div>
 
+<div class="add-author-button">
+    <a class="add-author-link" href="{% url 'blog:author_create' %}">Add Author</a>
+</div>
 {% endblock %}

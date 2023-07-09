@@ -2,19 +2,6 @@
 {% block title %} Blog Detail Page {% endblock %}
 {% block extra_css %}
 <style>
-    p {
-        font-size: large;
-    }
-
-    a.signup {
-        text-decoration: none;
-        font-size: 25px;
-    }
-
-    a.signup:hover {
-        color: green;
-        font-size: 30px;
-    }
     .blueForms form {
         width: 80%;
         margin: 2rem auto;
@@ -24,18 +11,16 @@
         background-color: #f8f8f8;
     }
 
-    /* Form Label */
-    label {
+    .blueForms label {
         font-size: 1.2rem;
         font-weight: bold;
         margin-bottom: 0.5rem;
         display: block;
     }
 
-    /* Form Input */
-    input[type="text"],
-    input[type="email"],input[type="password"]
-    {
+    .blueForms input[type="text"],
+    .blueForms input[type="email"],
+    .blueForms input[type="password"] {
         width: 100%;
         padding: 0.5rem;
         margin-bottom: 1.5rem;
@@ -44,9 +29,7 @@
         font-size: 1.2rem;
     }
 
-
-    /* Form Submit Button */
-    input[type="submit"] {
+    .blueForms input[type="submit"] {
         background-color: #030202;
         color: rgb(172, 167, 167);
         padding: 0.75rem 1.5rem;
@@ -56,23 +39,30 @@
         font-size: 1.2rem;
     }
 
-    /* Form Submit Button - Hover */
-    input[type="submit"]:hover {
+    .blueForms input[type="submit"]:hover {
         background-color: #838583;
         color: rgb(6, 5, 5);
+    }
+
+    p.signup {
+        text-decoration: none;
+        font-size: 25px;
+    }
+
+    p.signup a {
+        color: green;
+        font-size: 30px;
     }
 </style>
 {% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
-<div>
-
+<div class="blueForms">
     <h2>Sign Up</h2>
     <form method="post">
         {% csrf_token %}
         {% crispy form %}
     </form>
-    <p>If you already have an account ,then go to the <a class="signup" href="{% url 'login' %}">Log In</a> page.</p>
+    <p>If you already have an account, then go to the <a class="signup" href="{% url 'login' %}">Log In</a> page.</p>
 </div>
-
 {% endblock %}
