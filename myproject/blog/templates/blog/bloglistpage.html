@@ -27,8 +27,12 @@
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 10px;
+        
     }
-
+    .blog-list__title a{
+        text-decoration: none;
+        color: #007bff;
+    }
     .blog-list__date {
         font-size: 14px;
         color: #888;
@@ -97,7 +101,7 @@
     .add-blog-button .btn:focus {
         outline: none;
     }
-
+    
     @media (max-width: 768px) {
         .blog-list__item {
             width: 100%;
@@ -116,7 +120,7 @@
 <div class="container">
     {% for blog in page_obj %}
     <div class="blog-list__item">
-        <h2 class="blog-list__title">{{ blog.title }}</h2>
+        <h2 class="blog-list__title"> <a href="{% url 'blog:blogdetailview' blog.id %}"> {{ blog.title }}</a></h2>
         <span class="blog-list__date">{{ blog.posted_date }}</span>
         <p class="blog-list__author">
             <a class="link-update" href="{% url 'blog:authordetailview' blog.author_id %}">{{ blog.author }}</a>
