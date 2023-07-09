@@ -43,7 +43,7 @@
         /* Form Submit Button */
         button {
             background-color: #040504;
-            color: rgb(255, 255, 255);
+            color: #fff;
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 5px;
@@ -60,13 +60,11 @@
 </head>
 
 <body>
-
-    <h2>Log In </h2>
+    <h2>Log In</h2>
     <form method="post">
         {% csrf_token %}
         {{ form }}
-        <button type="submit">Log In </button>
+        <button type="submit">Log In</button>
     </form>
 </body>
-
 </html>
