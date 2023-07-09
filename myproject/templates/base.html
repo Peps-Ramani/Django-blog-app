@@ -85,9 +85,9 @@
             <li><a href="{% url 'blog:authorlistview' %}">Authors</a></li>
             <li><a href="{% url 'blog:homepage' %}">Home</a></li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li><a href="{% url 'user:logout' %}">Log Out</a></li>
             {% else %}
-            <li><a href="{% url 'login' %}">Log In</a></li>
+            <li><a href="{% url 'user:login' %}">Log In</a></li>
             <li><a href="{% url 'user:signup' %}">Sign Up</a></li>
             {% endif %}
         </ul>
